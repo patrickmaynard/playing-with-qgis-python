@@ -1,0 +1,10 @@
+#This comes straight from https://docs.python.org/2/library/csv.html
+#I am literally just testing the ability of the Kyngchaos QGIS python interpreter to write to an external csv file.
+
+import csv
+with open('/Users/patrickmaynard/Documents/delete-me-soon/eggs.csv', 'wb') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=' ',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+    
