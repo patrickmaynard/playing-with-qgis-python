@@ -21,29 +21,29 @@ def haversine(lon1, lat1, lon2, lat2):
     km = 6367 * c
     return km
 
-def calculateDistance(plutoFeature, layerEntrances):
+def calculateDistance(featureProperty, layerEntrances):
     #This is a stub for what will eventually be our distance-to-closest-station function.
     shortestDistance = 1000
-    entranceFeatures = layerEntrances.getFeatures()
-    for entranceFeature in entranceFeatures:
-            latEntrance = entranceFeature.geometry().centroid().asPoint().y()
-            lonEntrance = entranceFeature.geometry().centroid().asPoint().x()
-            latPluto = plutoFeature.geometry().centroid().asPoint().y()
-            lonPluto = plutoFeature.geometry().centroid().asPoint().x()
-            currentDistance = haversine(lonEntrance, latEntrance, lonPluto, latPluto)
+    featuresEntrances = layerEntrances.getFeatures()
+    for featureEntrance in featuresEntrances:
+            latEntrance = featureEntrance.geometry().centroid().asPoint().y()
+            lonEntrance = featureEntrance.geometry().centroid().asPoint().x()
+            latProperty = featureProperty.geometry().centroid().asPoint().y()
+            lonProperty = featureProperty.geometry().centroid().asPoint().x()
+            currentDistance = haversine(lonEntrance, latEntrance, lonProperty, latProperty)
             if currentDistance < shortestDistance:
                 shortestDistance = currentDistance
     return shortestDistance
 
-layerPluto = iface.addVectorLayer("/Users/patrickmaynard/Desktop/delete-me-soon/new-crs.shp", "PLUTO", "ogr")
-if not layerPluto:
-  print "layerPluto failed to load!"
+layerProperties = iface.addVectorLayer("/Users/patrickmaynard/Desktop/delete-me-soon/new-crs.shp", "Properties", "ogr")
+if not layerProperties:
+  print "layerProperties failed to load!"
 layerEntrances = iface.addVectorLayer("/Users/patrickmaynard/Downloads/subway/geo_export_950003d9-f387-479c-9bf5-a1ca5a252bce.shp", "Entrances", "ogr")
 if not layerEntrances:
-  print "layerPluto failed to load!"
+  print "layerProperties failed to load!"
 
 #features = layerEntrances.getFeatures()
-features = layerPluto.getFeatures()
+features = layerProperties.getFeatures()
 counter = 0
 featuresSelected = []
 for feature in features:
@@ -56,3 +56,4 @@ for feature in features:
         featuresSelected.append(feature.id())
         layerEntrances.setSelectedFeatures(featuresSelected)
     counter += 1
+    
