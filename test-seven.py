@@ -35,25 +35,27 @@ def calculateDistance(featureProperty, layerEntrances):
                 shortestDistance = currentDistance
     return shortestDistance
 
-layerProperties = iface.addVectorLayer("/Users/patrickmaynard/Desktop/delete-me-soon/new-crs.shp", "Properties", "ogr")
-if not layerProperties:
-  print "layerProperties failed to load!"
-layerEntrances = iface.addVectorLayer("/Users/patrickmaynard/Downloads/subway/geo_export_950003d9-f387-479c-9bf5-a1ca5a252bce.shp", "Entrances", "ogr")
-if not layerEntrances:
-  print "layerProperties failed to load!"
+def importAndAnalyze(rowLimit = 3):
+    layerProperties = iface.addVectorLayer("/Users/patrickmaynard/Desktop/delete-me-soon/new-crs.shp", "Properties", "ogr")
+    if not layerProperties:
+      print "layerProperties failed to load!"
+    layerEntrances = iface.addVectorLayer("/Users/patrickmaynard/Downloads/subway/geo_export_950003d9-f387-479c-9bf5-a1ca5a252bce.shp", "Entrances", "ogr")
+    if not layerEntrances:
+      print "layerProperties failed to load!"
 
-#features = layerEntrances.getFeatures()
-features = layerProperties.getFeatures()
-counter = 0
-featuresSelected = []
-for feature in features:
-    if counter < 3:
-        #print feature['name']
-        print feature['Address']
-        print feature.geometry().centroid().asPoint().y()
-        print feature.geometry().centroid().asPoint().x()
-        print calculateDistance(feature, layerEntrances)
-        featuresSelected.append(feature.id())
-        layerEntrances.setSelectedFeatures(featuresSelected)
-    counter += 1
-    
+    #features = layerEntrances.getFeatures()
+    features = layerProperties.getFeatures()
+    counter = 0
+    featuresSelected = []
+    for feature in features:
+        if counter < 3:
+            #print feature['name']
+            print feature['Address']
+            print feature.geometry().centroid().asPoint().y()
+            print feature.geometry().centroid().asPoint().x()
+            print calculateDistance(feature, layerEntrances)
+            featuresSelected.append(feature.id())
+            layerEntrances.setSelectedFeatures(featuresSelected)
+        counter += 1
+        
+importAndAnalyze()
