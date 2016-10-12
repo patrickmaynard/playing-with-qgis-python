@@ -1,0 +1,11 @@
+#This also comes from https://docs.python.org/2/library/csv.html
+#I want to be a little more demanding now: The csv file produced must open in my spreadsheet program.
+
+import csv
+
+with open('/Users/patrickmaynard/Desktop/eggs.csv', 'wb') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',',
+                            quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+    spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
