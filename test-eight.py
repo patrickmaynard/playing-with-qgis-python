@@ -3,6 +3,7 @@ import csv
 
 #Now I want to write a sample csv file with the distances between a few properties and their closest subway stations.
 #Inspired by http://iquantny.tumblr.com/post/99544282749/found-the-manhattan-apartment-thats-the-farthest 
+#(To roughly replicate their results, set the argument on the final line to a million.)
 #For full documentation of the people/threads/tutorials that helped lead to this project, please view the python comments in these scripts:
 #https://github.com/patrickmaynard/playing-with-qgis-python
 
@@ -58,9 +59,7 @@ class Snobbery(object):
                     #print feature['name']
                     print feature['Address']
                     spamwriter.writerow([feature['Address'], feature.geometry().centroid().asPoint().y(),feature.geometry().centroid().asPoint().x(), Snobbery.calculateDistance(feature, layerEntrances)])
-                    featuresSelected.append(feature.id())
-                    layerEntrances.setSelectedFeatures(featuresSelected)
                 counter += 1
 
         
-Snobbery.importAndAnalyze(12)
+Snobbery.importAndAnalyze(5)
